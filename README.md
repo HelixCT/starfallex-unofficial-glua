@@ -3,7 +3,7 @@ An unofficial glua extension for StarfallEx based on the kCore glua extensions m
 
 ## CallGlobal Example
 ```Lua
---@name luaRunPly Example
+--@name CallGlobal Example
 --@server
 
 CallGlobal(function(g)
