@@ -7,22 +7,24 @@ return function(instance)
 
 local builtins_library = instance.env
 
---------------------------------------------------------------------------
---                                                                      --
---                           hCore (:eksde:)                            --
---                                                                      --
---------------------------------------------------------------------------
+--- Built in values. These don't need to be loaded; they are in the default builtins_library.
+-- @name builtins
+-- @shared
+-- @class library
+-- @libtbl builtins_library
 
 if SERVER then
 
 	--- Runs Lua on the server
+	-- @name CallGlobal
 	-- @server
-	function builtins_library.CallGlobal(fn)
+	function builtins_library.CallGlobal(fn, ...)
 		if not instance.player:IsSuperAdmin() then
 			return false
 		end
 
-		return fn(_G)
+		debug.setfenv(fn, _G)
+		return fn(...)
 	end
 
 end
