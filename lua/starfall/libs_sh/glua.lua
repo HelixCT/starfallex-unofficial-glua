@@ -17,12 +17,12 @@ if SERVER then
 
 	--- Runs Lua on the server
 	-- @server
-	function builtins_library.CallGlobal(lua)
-		if not instance.player:IsSuperAdmin() then 
-			return false 
+	function builtins_library.CallGlobal(fn)
+		if not instance.player:IsSuperAdmin() then
+			return false
 		end
 
-  		setmetatable(instance.env, { __index = _G })
+		return fn(_G)
 	end
 
 end
