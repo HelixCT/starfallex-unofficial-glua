@@ -13,5 +13,4 @@ CallGlobal(function(g)
   end
 
 end)
-``
 ```
