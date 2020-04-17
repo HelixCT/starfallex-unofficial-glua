@@ -3,13 +3,13 @@ local function pack(...)
 end
 
 return function(instance)
-	local wrap = instance.WrapObject
-	local unwrap = instance.UnwrapObject
-	local builtins = instance.env
-
 	if not instance.player:IsSuperAdmin() then
 		return
 	end
+
+	local wrap = instance.WrapObject
+	local unwrap = instance.UnwrapObject
+	local builtins = instance.env
 
 	local GLuaWrapper do
 		GLuaWrapper = {}
@@ -73,4 +73,6 @@ return function(instance)
 	end
 
 	instance.env.glua = GLuaWrapper.wrap(_G)
+	instance.env.unwrap = unwrap
+	instance.env.wrap = wrap
 end
