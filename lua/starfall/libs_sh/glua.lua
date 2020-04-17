@@ -52,8 +52,8 @@ return function(instance)
 			end
 		}
 
-		function meta.__index(self, k, v)
-			local raw = rawget(self._Inner, k, v)
+		function meta.__index(self, k)
+			local raw = self._Inner[k]
 			local rawType = type(raw)
 
 			if not raw then
@@ -64,7 +64,7 @@ return function(instance)
 		end
 
 		function meta.__newindex(self, k, v)
-			rawset(self._Inner, k, unwrap(v))
+			self._Inner[k] = unwrap(v)
 		end
 
 		function meta.__metatable(self, k, v)
