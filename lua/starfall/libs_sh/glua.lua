@@ -16,7 +16,7 @@ return function(instance)
 		local meta = {}
 		local cache = {}
 
-		function GLuaWrapper.from(tbl)
+		function GLuaWrapper.wrap(tbl)
 			cache[tbl] = cache[tbl] or setmetatable({
 				_Inner = tbl
 			}, meta)
@@ -36,7 +36,11 @@ return function(instance)
 					local res = pack(fn(unpack(args)))
 
 					for i = 1, #res do
-						res[i] = wrap(res[i])
+						if type(res[i]) == "table" then
+							res[i] = Accessor.wrap(res[i])
+						else
+							res[i] = wrap(res[i])
+						end
 					end
 
 					return unpack(res)
@@ -44,7 +48,7 @@ return function(instance)
 			end,
 
 			["table"] = function(tbl)
-				return GLuaWrapper.from(tbl)
+				return GLuaWrapper.wrap(tbl)
 			end
 		}
 
@@ -68,5 +72,5 @@ return function(instance)
 		end
 	end
 
-	instance.env.glua = GLuaWrapper.from(_G)
+	instance.env.glua = GLuaWrapper.wrap(_G)
 end
