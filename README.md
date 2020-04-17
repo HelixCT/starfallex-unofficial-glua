@@ -1,10 +1,11 @@
 # starfallex-unofficial-glua
-An unofficial glua extension for StarfallEx based on the kCore glua extensions made for E2.
+Exposes a global `glua` in StarfallEX to superadmins, along with `wrap` and
+`unwrap` to convert glua objects to Starfall objects and back, respectively.
 
 ## CallGlobal Example
 ```Lua
---@name CallGlobal Example
---@server
+--@name Hodd Toward
+--@shared
 
-glua.print("Hello world!")
+glua.print("It just works.")
 ```
