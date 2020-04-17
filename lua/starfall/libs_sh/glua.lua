@@ -37,7 +37,7 @@ return function(instance)
 
 					for i = 1, #res do
 						if type(res[i]) == "table" then
-							res[i] = Accessor.wrap(res[i])
+							res[i] = GLuaWrapper.wrap(res[i])
 						else
 							res[i] = wrap(res[i])
 						end
@@ -67,8 +67,8 @@ return function(instance)
 			self._Inner[k] = unwrap(v)
 		end
 
-		function meta.__metatable(self, k, v)
-			return false
+		function meta.__metatable(self)
+			return getmetatable(self._Inner)
 		end
 	end
 
