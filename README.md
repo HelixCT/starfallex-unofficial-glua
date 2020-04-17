@@ -6,11 +6,5 @@ An unofficial glua extension for StarfallEx based on the kCore glua extensions m
 --@name CallGlobal Example
 --@server
 
-CallGlobal(function(g)
-    
-  for _, v in pairs(g.player.GetAll()) do
-    print(v:GetName())
-  end
-
-end)
+glua.print("Hello world!")
 ```
