@@ -24,7 +24,7 @@ return function(instance)
 			return cache[tbl]
 		end
 
-		local indexTypedWrappers = {
+		local wrappers = {
 			["function"] = function(fn)
 				return function(...)
 					local args = { ... }
@@ -49,9 +49,14 @@ return function(instance)
 		}
 
 		function meta.__index(self, k, v)
-			local raw = rawget(self, k, v) or rawget(self._Inner, k, v)
+			local raw = rawget(self._Inner, k, v)
+			local rawType = type(raw)
 
-			return indexTypedWrappers[raw] and indexTypedWrappers[raw](raw) or wrap(raw)
+			if not raw then
+				return nil
+			end
+
+			return wrappers[rawType] and wrappers[rawType](raw) or wrap(raw)
 		end
 
 		function meta.__newindex(self, k, v)
